@@ -29,15 +29,15 @@ sim_box = np.array([[10.695, -2.119, 0.594],
 
 ratio = [1, 3]
 
-x = SymCases(rigid_type, ratio, 3)
+x = SymCases(rigid_type, ratio, 4)
 # print(f'sym:{sym_no}')
 # print(f'sym_no:{sym_no}')
 # print(f'rigid_type:{rigid_type}')
-# b = x.case_list(15)
-# for key in b.keys():
-#     print(f'{key}: {b[key]}')
+b = x.case_list(62)
+for key in b.keys():
+    print(f'{key}: {b[key]}')
 
-c = case_count(rigid_type, ratio, 3, 134, 134)
+c = case_count(rigid_type, ratio, 4, 62, 62)
 
 # sym_information(sym_no, b, 3)
 # root_path = os.getcwd()
