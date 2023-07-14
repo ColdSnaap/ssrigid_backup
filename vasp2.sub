@@ -1,0 +1,55 @@
+#!/bin/bash
+
+#SBATCH --job-name=MV_Vasp
+#SBATCH --out=Foundry-%j.out
+#SBATCH --time=100:00:00
+#SBATCH --ntasks=64
+#SBATCH --nodes=1
+#SBATCH --partition=requeue
+
+ulimit -s unlimited
+module load vasp
+module load python/3.8.2
+cd relax
+mpirun vasp_std
+cd ..
+python3.8 < firstrelax.py
+cd trail
+mpirun vasp_std
+cp POSCAR POSCAR_ref
+cp OUTCAR OUTCAR_ref
+cd ..
+
+for i in {1..10000}
+do
+	if (($i % 50 == 0))
+	then
+		echo "relax..."
+		cd trail
+		cp POSCAR_ref ../relax/POSCAR
+		cd ../relax
+		mpirun vasp_std
+		echo "relax done"
+		cd ..
+		python3.8 < structureupdate.py
+		python3.8 < forcejump.py
+		cd trail
+		mpirun vasp_std
+		cp POSCAR POSCAR_ref
+		cp OUTCAR OUTCAR_ref
+		echo "write file done"
+		cd ..
+	else
+		echo "-----------------------------------------------------------------------------------------"
+		echo "step number : $i"
+		python3.8 < mc.py
+		echo "Generate done"
+		cd trail
+		mpirun vasp_std
+		cd ../
+		python3.8 < interprocess.py
+		python3.8 < metropolis.py
+		echo "Metropolis done"
+	fi
+
+done

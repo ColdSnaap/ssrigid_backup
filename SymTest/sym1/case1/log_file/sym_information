@@ -1,0 +1,7 @@
+SpaceGroup : 1
+WyckoffRigid : s1 
+WyckoffSingle : s1 s1 s1 
+rigid_1 : 0 1 2 3 4 
+single_1 : 5 
+single_2 : 6 
+single_3 : 7 

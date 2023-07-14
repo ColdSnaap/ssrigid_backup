@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#SBATCH --job-name=Vasp
+#SBATCH --out=Foundry-%j.out
+#SBATCH --time=100:00:00
+#SBATCH --ntasks=64
+#SBATCH --nodes=1
+#SBATCH --partition=requeue
+
+ulimit -s unlimited
+module load vasp
+mpirun vasp_std
+
+
