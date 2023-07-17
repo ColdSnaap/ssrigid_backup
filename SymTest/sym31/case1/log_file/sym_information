@@ -1,0 +1,6 @@
+SpaceGroup : 31
+WyckoffRigid : s1 
+WyckoffSingle : s1 s2 
+rigid_1 : 0 2 6 8 5 
+single_1 : 10 
+single_2 : 12 

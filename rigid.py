@@ -161,9 +161,11 @@ class Tetrahedron:
             wyck_sym = [['1'], ['m', 'y', 'z'], ['x', 'm', 'z'], ['x', 'y', 'm'], ['2', 'y', 'z'], 
                         ['x', '2', 'z'],['x', 'y', '2'], ['2', 'm', 'm'], ['m', '2', 'm'], ['m', 'm', '2']]
         elif lattice_type == 'Tetragonal':
-            wyck_sym = [['1'], ['2', 'y', 'z'], ['-4', 'y', 'z'], ['-4', '2', 'm']]
+            wyck_sym = [['1'], ['m', 'y', 'z'], ['x', 'm', 'z'], ['x', 'y', 'm'], ['2', 'y', 'z'], 
+                        ['x', '2', 'z'], ['x', 'y', '2'], ['-4', 'y', 'z'], ['-4', '2', 'm']]
         elif lattice_type == 'Trigonal':
-            wyck_sym = [['1'], ['m']]
+            wyck_sym = [['1'], ['m', 'y', 'z'], ['x', 'm', 'z'], ['x', 'y', 'm'], ['2', 'y', 'z'], 
+                        ['x', '2', 'z'], ['x', 'y', '2'], ['-4', 'y', 'z'], ['-4', '2', 'm']]
         elif lattice_type == 'Hexagonal':
             wyck_sym = [['1'], ['2', 'y', 'z'], ['3', 'y', 'z']]
         return wyck_sym
@@ -221,15 +223,18 @@ class GeSe:
     def wyckoff_sym(self):
         lattice_type = sym_to_lattice(self.sym_no)
         if lattice_type == 'Triclinic':
-            wyck_sym = [['1'], ['-1']]
+            wyck_sym = [['1'], ['-1'], ['-2']]
         elif lattice_type == 'Monoclinic':
-            wyck_sym = [['1'], ['-1'], ['m']]
+            wyck_sym = [['1'], ['-1'], ['m'], ['-2']]
         elif lattice_type == 'Orthorhombic':
-            wyck_sym = [['1'], ['m', 'y', 'z'], ['x', 'm', 'z'], ['x', 'y', 'm'],]
+            wyck_sym = [['1'], ['m', 'y', 'z'], ['x', 'm', 'z'], ['x', 'y', 'm'], ['2', 'y', 'z'], ['x', '2', 'y'],
+                        ['x', 'y', '2']]
         elif lattice_type == 'Tetragonal':
-            wyck_sym = [['1'], ['m']]
+            wyck_sym = [['1'], ['-1'], ['2', 'y', 'z'], ['x', '2', 'z'], ['x', 'y', '2'], ['3', 'y', 'z'], ['x', 'm', 'z'], ['m', 'y', 'z'], ['x', 'y', 'm']
+                        ['-3', 'y', 'z'], ['3', '2', 'z'], ['3', 'm', 'z'], ['-3', 'm', 'z']]
         elif lattice_type == 'Trigonal':
-            wyck_sym = [['1'], ['m']]
+            wyck_sym = [['1'], ['-1'], ['2', 'y', 'z'], ['x', '2', 'z'], ['x', 'y', '2'], ['3', 'y', 'z'], ['x', 'm', 'z'], ['m', 'y', 'z'], ['x', 'y', 'm']
+                        ['-3', 'y', 'z'], ['3', '2', 'z'], ['3', 'm', 'z'], ['-3', 'm', 'z']]
         elif lattice_type == 'Hexagonal':
             wyck_sym = [['1']]
         return wyck_sym

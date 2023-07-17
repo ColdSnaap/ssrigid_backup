@@ -12,7 +12,7 @@ The example is with tetrahedron and symmetry number 15)
 Add new rigid body: Add new rigid body information in rigid.py and rigid_generate function in functions.py
 """
 
-from ase.spacegroup import crystal
+# from ase.spacegroup import crystal
 from readinginput import *
 from rigid import *
 from casecount import *

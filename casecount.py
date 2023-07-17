@@ -38,6 +38,7 @@ class SymCases:
         self.ratio = ratio
         self.rigid_no_limit = rigid_number_limit
     # ratio = [1, 3] not support [1, 1, 1] right now
+    # ratio = 3
     def case_list(self, sym_no):
         case_dic = {}
         sym_site_list = []
@@ -132,11 +133,12 @@ class SymCases:
 def case_count(rigid_type, ratio, rigid_number_limit, low, high):
     sym = SymCases(rigid_type, ratio, rigid_number_limit)
     for i in range(low, high + 1):
-        sym_dic = sym.case_list(i)
-        if len(sym_dic) == 1 and sym_dic['case1'] == 'TBD':
-            count = 'TBD'
-        elif len(sym_dic) == 0:
-            count = 0
-        else:
-            count = len(sym_dic)
-        print(f'sym:{i}  case:{count}')
+        if f'sg_{i}' in sg:
+            sym_dic = sym.case_list(i)
+            if len(sym_dic) == 1 and sym_dic['case1'] == 'TBD':
+                count = 'TBD'
+            elif len(sym_dic) == 0:
+                count = 0
+            else:
+                count = len(sym_dic)
+            print(f'sym:{i}  case:{count}')
