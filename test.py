@@ -27,18 +27,18 @@ sim_box = np.array([[10.695, -2.119, 0.594],
 
 # print(system_transform.positions)
 
-ratio = [1, 6]
-rigid_type = 'GeSe'
+ratio = [1, 3]
+rigid_type = 'Tetrahedron'
 
-x = SymCases(rigid_type, ratio, 4)
+x = SymCases(rigid_type, ratio, 3)
 # print(f'sym:{sym_no}')
 # print(f'sym_no:{sym_no}')
 # print(f'rigid_type:{rigid_type}')
-# b = x.case_list(62)
-# for key in b.keys():
-#     print(f'{key}: {b[key]}')
+b = x.case_list(113)
+for key in b.keys():
+    print(f'{key}: {b[key]}')
 
-c = case_count(rigid_type, ratio, 3, 1, 198)
+# c = case_count(rigid_type, ratio, 3, 1, 200)
 
 # sym_information(sym_no, b, 3)
 # root_path = os.getcwd()

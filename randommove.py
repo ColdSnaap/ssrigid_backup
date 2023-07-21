@@ -38,8 +38,10 @@ class AtomRandomMove:
                 atoms_move_single[0] = 0
             else:
                 atoms_move_single[0] = step_algorithm(algorithm, temp)
-            if wyckoff_position[1] != 'y':
+            if wyckoff_position[1] != 'y' and wyckoff_position[1] != 'x+0.5':
                 atoms_move_single[1] = 0
+            elif wyckoff_position[1] != 'y' and wyckoff_position[1] == 'x+0.5':
+                atoms_move_single[1] = atoms_move_single[0] + 0.5
             else:
                 atoms_move_single[1] = step_algorithm(algorithm, temp)
             if wyckoff_position[2] != 'z':

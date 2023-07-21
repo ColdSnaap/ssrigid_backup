@@ -17,6 +17,7 @@ rigid_af_rotate = rigid_to_wyckoff @ rotation
 
 print(rigid_af_rotate)
 print('---------------')
+coor_list = []
 for cor in rigid_af_rotate:
     cor2 = direct_cartesian_transform(cor, cell, 'CtoD')
     cor3 = [(cor2[0], cor2[1], cor2[2])]

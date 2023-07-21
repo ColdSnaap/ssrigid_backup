@@ -88,12 +88,15 @@ class SymCases:
                 rigid_com_list_final.append(i)
         # print(f'rigid_com_list_final:{rigid_com_list_final}')
             # get single comb in i
+        final_len_count = 0
         for i in rigid_com_list_final:
             single_ratio = self.ratio[1]
             single_amount = total_atom_number_from_wyckoff(sym_no, i) * single_ratio
-            single_site_list1 = []
-            single_site_list_final = []
+            # single_site_list1 = []
+            # single_site_list_final = []
             for m in range(1, single_amount+1):
+                single_site_list1 = []
+                single_site_list_final = []
                 single_site_list = list(combinations_with_replacement(sym_site_list, m))
                 for j in single_site_list:
                     if len(j) == 1:
@@ -103,31 +106,45 @@ class SymCases:
                         for k in j:
                             site_list.append(k[0])
                         single_site_list1.append(site_list)
-            # print(f'single_site_list1:{single_site_list1}')
-            for j in single_site_list1:
-                # print(f'f:{j}')
-                uniq_site_check = 0
+                # print(f'single_site_list1:{single_site_list1}')
+                for j in single_site_list1:
+                    # print(f'f:{j}')
+                    uniq_site_check = 0
 
-                dup = [item for item, count in collections.Counter(j).items() if count > 1]
-                # print(f'dup:{dup}')
-                if len(dup) != 0:
-                    for n in dup:
-                        if uniq_site(sym_no, n) == 'yes':
-                            uniq_site_check = 1
-                            break
-              
-                if total_atom_number_from_wyckoff(sym_no, j) == single_amount and uniq_site_check == 0:
-                    single_site_list_final.append(j)
-            
-            # print(f'i:{i}')
-            # print(f'single_site_list_final:{single_site_list_final}')
+                    dup = [item for item, count in collections.Counter(j).items() if count > 1]
+                    # print(f'dup:{dup}')
+                    if len(dup) != 0:
+                        for n in dup:
+                            if uniq_site(sym_no, n) == 'yes':
+                                uniq_site_check = 1
+                                break
+                
+                    if total_atom_number_from_wyckoff(sym_no, j) == single_amount and uniq_site_check == 0:
+                        single_site_list_final.append(j)
+                    
+                final_len = len(single_site_list_final)
+                final_len_count += final_len
+                if final_len_count >= 10000:
+                    # print('check')
+                    single_site_list_final = 'TBD'
 
-            index_case_dic = len(case_dic)
-            index_list = len(single_site_list_final)
-            for j in range(index_list):
-                case_dic[f'case{index_case_dic + j + 1}'] = {}
-                case_dic[f'case{index_case_dic + j + 1}']['rigid'] = i
-                case_dic[f'case{index_case_dic + j + 1}']['single'] = single_site_list_final[j]
+                # print(f'i:{i}')
+                # print(f'rigid:{i} final_len_count:{final_len_count}')
+                if single_site_list_final != 'TBD':
+                    index_case_dic = len(case_dic)
+                    index_list = len(single_site_list_final)
+                    for j in range(index_list):
+                        case_dic[f'case{index_case_dic + j + 1}'] = {}
+                        case_dic[f'case{index_case_dic + j + 1}']['rigid'] = i
+                        case_dic[f'case{index_case_dic + j + 1}']['single'] = single_site_list_final[j]
+                else:
+                    case_dic = {}
+                    case_dic['case1'] = 'TBD'
+                    break
+                # print(f'rigid:{i} m:{m}')
+                # print(f'single_site_list_final:{single_site_list_final}')
+                # print('----------------')
+        # print(f'single_site_list_final:{single_site_list_final}')
         return case_dic 
     
 def case_count(rigid_type, ratio, rigid_number_limit, low, high):

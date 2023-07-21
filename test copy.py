@@ -1,13 +1,15 @@
 import numpy as np
-atom_cor1 = np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]])
-atom_cor2 = np.array([[1, 2, 1],[1, 1, 1],[1, 1, 1]])
+from functions import direct_cartesian_transform, move_atoms_into_box
 
-list = []
-for j,k in enumerate(atom_cor1):
-    list_inter = []
-    for i in atom_cor1[j]:
-        list_inter.append(i)
-    list.append(list_inter)
+cell = np.array([[6.9336127435, 0., 0.],
+        [0., 6.9336127435, 0.],
+        [0., 0., 6.9336127435]])
 
-for j, k in enumerate(atom_cor1):    
-    print(f'{k[0]} {k[1]} {k[2]}')
+position = np.array([3., 3., 3.])
+add_matrix = np.array([0., 0.5, 0.])
+# direct coor plus
+
+# position_dir = direct_cartesian_transform(position, cell, 'CtoD')
+# print(position_dir)
+def dir_coor_add(cell, position, add_matrix):
+    
